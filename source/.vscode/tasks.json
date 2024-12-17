@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "dotnet",
+			"task": "build ${workspaceFolder}/Symlex/symlex.csproj",
+			"file": "${workspaceFolder}/Symlex/symlex.csproj",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "build symlex"
+		},
+		{
+			"type": "shell",
+			"label": "build tests (console)",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"${workspaceFolder}/.test/Symlex.Lexer.Tests/console.tests.csproj"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+	]
+}

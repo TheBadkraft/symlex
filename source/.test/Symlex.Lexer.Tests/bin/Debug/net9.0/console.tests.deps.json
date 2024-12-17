@@ -1,0 +1,80 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "console.tests/1.0.0": {
+        "dependencies": {
+          "symlex": "1.0.0",
+          "FakeItEasy": "8.0.0.0",
+          "mindforge.testrunner": "1.0.0.0"
+        },
+        "runtime": {
+          "console.tests.dll": {}
+        }
+      },
+      "symlex/1.0.0": {
+        "runtime": {
+          "symlex.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "FakeItEasy/8.0.0.0": {
+        "runtime": {
+          "FakeItEasy.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.3.0.0"
+          }
+        }
+      },
+      "mindforge.testrunner/1.0.0.0": {
+        "runtime": {
+          "mindforge.testrunner.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Castle.Core/5.0.0.0": {
+        "runtime": {
+          "Castle.Core.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.1.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "console.tests/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "symlex/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FakeItEasy/8.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "mindforge.testrunner/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Castle.Core/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "symlex.net",
+      "type": "coreclr",
+      "request": "launch",
+      "console": "externalTerminal",
+      "program": "${workspaceFolder}/Symlex/bin/Debug/net9.0/symlex",
+      "preLaunchTask": "build symlex"
+    },
+    {
+      "name": "runner.net",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/../lib/mindforge.testrunner",
+      "preLaunchTask": "build tests (console)"
+    },
+  ]
+}

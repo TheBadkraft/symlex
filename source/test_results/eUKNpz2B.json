@@ -1,0 +1,9 @@
+[
+  {
+    "timestamp": "2024-12-16T07:28:07.0014100-06:00",
+    "method": "InputBufferTesting.Initialization",
+    "result": "Pass",
+    "duration": "00:00:00.0212092",
+    "message": null
+  }
+]

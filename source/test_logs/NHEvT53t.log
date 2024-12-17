@@ -1,0 +1,29 @@
+Launching MindForge.TestRunner!
+[20:05:58.457] [INFO   ]: TestRunner.Director is ready to run.
+[20:05:58.526] [INFO   ]: Begin Test Discovery ...
+[20:05:58.728] [INFO   ]: Found 2 test containers in console.tests
+[20:05:58.729] [INFO   ]: TestContainer: LexerTesting *** IGNORED ***
+[20:05:58.729] [INFO   ]: TestContainer: InputBufferTesting
+[20:05:58.750] [INFO   ]: Begin Test Execution ...
+[20:05:58.786] [INFO   ]: Test    InitializedInputBuffer in InputBufferTesting             Pass.
+[20:05:58.807] [INFO   ]: Test         InputBufferLength in InputBufferTesting             Pass.
+[20:05:58.823] [INFO   ]: Test       ReadSingleLineInput in InputBufferTesting             Pass.
+[20:05:58.840] [INFO   ]: Test        ReadMultiLineInput in InputBufferTesting             Fail.
+[20:05:58.845] [INFO   ]: ... Test Execution Complete
+[20:05:58.846] [INFO   ]: Begin Auditing Results ...
+[20:05:58.850] [TEST   ]: Test Summary:
+[20:05:58.850] [TEST   ]:   Total Tests: 4
+[20:05:58.850] [TEST   ]:   Passed: 3
+[20:05:58.850] [TEST   ]:   Failed: 1
+[20:05:58.850] [TEST   ]:   Undefined: 0
+[20:05:58.879] [TEST   ]:   Pass Rate: 75.000%
+[20:05:58.880] [TEST   ]: Detailed Results:
+[20:05:58.880] [TEST   ]:   InputBufferTesting.InitializedInputBuffer, Result: Pass, Duration: 00:00:00.0209207
+[20:05:58.880] [TEST   ]:   InputBufferTesting.InputBufferLength, Result: Pass, Duration: 00:00:00.0028834
+[20:05:58.880] [TEST   ]:   InputBufferTesting.ReadSingleLineInput, Result: Pass, Duration: 00:00:00.0109491
+[20:05:58.880] [TEST   ]:   InputBufferTesting.ReadMultiLineInput, Result: Fail, Duration: 00:00:00.0109078
+[20:05:58.880] [TEST   ]:     Expected: [=proc add:input a, b:body a + b], Actual: [=proc add
+:input a, b
+:body a + b]
+
+[20:05:58.889] [INFO   ]: TestRunner.Director has completed all actions.

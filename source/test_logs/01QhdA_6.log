@@ -1,0 +1,21 @@
+Launching MindForge.TestRunner!
+[19:50:27.842] [INFO   ]: TestRunner.Director is ready to run.
+[19:50:27.910] [INFO   ]: Begin Test Discovery ...
+[19:50:28.091] [INFO   ]: Found 2 test containers in console.tests
+[19:50:28.092] [INFO   ]: TestContainer: LexerTesting *** IGNORED ***
+[19:50:28.092] [INFO   ]: TestContainer: InputBufferTesting
+[19:50:28.115] [INFO   ]: Begin Test Execution ...
+[19:50:28.152] [INFO   ]: Test    InitializedInputBuffer in InputBufferTesting             Pass.
+[19:50:28.171] [INFO   ]: Test           ReadInputBuffer in InputBufferTesting             Pass.
+[19:50:28.176] [INFO   ]: ... Test Execution Complete
+[19:50:28.177] [INFO   ]: Begin Auditing Results ...
+[19:50:28.182] [TEST   ]: Test Summary:
+[19:50:28.182] [TEST   ]:   Total Tests: 2
+[19:50:28.182] [TEST   ]:   Passed: 2
+[19:50:28.182] [TEST   ]:   Failed: 0
+[19:50:28.182] [TEST   ]:   Undefined: 0
+[19:50:28.209] [TEST   ]:   Pass Rate: 100.000%
+[19:50:28.210] [TEST   ]: Detailed Results:
+[19:50:28.210] [TEST   ]:   InputBufferTesting.InitializedInputBuffer, Result: Pass, Duration: 00:00:00.0228609
+[19:50:28.210] [TEST   ]:   InputBufferTesting.ReadInputBuffer, Result: Pass, Duration: 00:00:00.0117289
+[19:50:28.219] [INFO   ]: TestRunner.Director has completed all actions.

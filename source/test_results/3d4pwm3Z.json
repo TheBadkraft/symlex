@@ -1,0 +1,16 @@
+[
+  {
+    "timestamp": "2024-12-16T19:47:13.8066844-06:00",
+    "method": "InputBufferTesting.InitializedInputBuffer",
+    "result": "Pass",
+    "duration": "00:00:00.0221399",
+    "message": null
+  },
+  {
+    "timestamp": "2024-12-16T19:47:13.8357078-06:00",
+    "method": "InputBufferTesting.ReadInputBuffer",
+    "result": "Fail",
+    "duration": "00:00:00.0121223",
+    "message": "Expected: test, Actual: test\uFFFF"
+  }
+]
