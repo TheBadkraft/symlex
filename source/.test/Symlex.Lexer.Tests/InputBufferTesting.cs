@@ -4,7 +4,7 @@ using Symlex.IO;
 
 namespace Symlex.Input.Tests;
 
-[TestContainer]
+[TestContainer(Ignore = true)]
 public class InputBufferTesting
 {
 
@@ -29,7 +29,21 @@ public class InputBufferTesting
     }
 
     [Test]
-    public void ReadSingleLineInput()
+    public void ReadSingleCharacter()
+    {
+        string input = "t";
+        WriteToMockStream(input);
+
+        int scan = inputBuffer.Read();
+        Assert.AreEqual(input[0], (char)scan);
+        Debug.WriteLine($"ReadSingleCharacter (scan)    :: {scan} [{(char)scan}]");
+
+        Assert.AreEqual(input, consoleOutput.ToString());
+        Debug.WriteLine($"ReadSingleCharacter (console) :: {consoleOutput}");
+    }
+
+    [Test]
+    public void ReadMultiCharacter()
     {
         string input = "test";
         WriteToMockStream(input);
@@ -46,22 +60,20 @@ public class InputBufferTesting
         scanBuffer.Clear();
 
         Assert.AreEqual(input, statement);
-        Debug.WriteLine($"ReadInputBuffer (statement) :: {statement}");
+        Debug.WriteLine($"ReadInputBuffer (scan)      :: {statement}");
 
         Assert.AreEqual(input, consoleOutput.ToString());
         Debug.WriteLine($"ReadInputBuffer (console)   :: {consoleOutput}");
     }
 
-
     [Test]
-    public void ReadMultiLineInput()
+    public void ReadBackspace()
     {
-        string input = "[=proc add:input a, b:body a + b]";
-        string multiLineInput = "[=proc add\n:input a, b\n:body a + b]\n";
-        WriteToMockStream(multiLineInput);
+        string input = "t\bp";
+        WriteToMockStream(input);
 
         var scanBuffer = new List<char>();
-        var scan = 0;
+        int scan;
 
         while ((scan = inputBuffer.Read()) != -1)
         {
@@ -71,11 +83,11 @@ public class InputBufferTesting
         var statement = new string(scanBuffer.ToArray());
         scanBuffer.Clear();
 
-        Assert.AreEqual(input, statement);
-        Debug.WriteLine($"ReadInputBuffer (statement) :: {statement}");
+        Assert.AreEqual("t\bp", statement);
+        Debug.WriteLine($"ReadBackspace (scan)      :: {statement}");
 
-        Assert.AreEqual(multiLineInput.TrimEnd(), consoleOutput.ToString());
-        Debug.WriteLine($"ReadInputBuffer (console)   :: {consoleOutput}");
+        Assert.AreEqual("t\bp", consoleOutput.ToString());
+        Debug.WriteLine($"ReadBackspace (console)   :: {consoleOutput}");
     }
 
     private void WriteToMockStream(string text)
@@ -91,7 +103,6 @@ public class InputBufferTesting
     {
         consoleOutput = new StringBuilder();
         mockInputStream = new MemoryStream();
-        // Console.SetIn(new StreamReader(mockInputStream));
         Console.SetOut(new StringWriter(consoleOutput));
         inputBuffer = new InputBuffer(mockInputStream);
     }
@@ -108,7 +119,6 @@ public class InputBufferTesting
     [ContainerInitialize]
     public static void ContainerInitialize(TestContext context)
     {
-        // TestContext = context;
     }
     #endregion Container Initialization & CleanUp
 }

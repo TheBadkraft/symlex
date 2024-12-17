@@ -1,0 +1,25 @@
+Launching MindForge.TestRunner!
+[15:28:23.926] [INFO   ]: TestRunner.Director is ready to run.
+[15:28:23.994] [INFO   ]: Begin Test Discovery ...
+[15:28:24.205] [INFO   ]: Found 3 test containers in console.tests
+[15:28:24.205] [INFO   ]: TestContainer: LexerTesting *** IGNORED ***
+[15:28:24.206] [INFO   ]: TestContainer: InputBufferTesting *** IGNORED ***
+[15:28:24.206] [INFO   ]: TestContainer: ReadStatementTesting
+[15:28:24.227] [INFO   ]: Begin Test Execution ...
+[15:28:24.270] [INFO   ]: Test   ReadStatementSingleLine in ReadStatementTesting           Pass.
+[15:28:24.279] [INFO   ]: Test    ReadStatementMultiLine in ReadStatementTesting           Fail.
+[15:28:24.285] [INFO   ]: ... Test Execution Complete
+[15:28:24.286] [INFO   ]: Begin Auditing Results ...
+[15:28:24.290] [TEST   ]: Test Summary:
+[15:28:24.290] [TEST   ]:   Total Tests: 2
+[15:28:24.290] [TEST   ]:   Passed: 1
+[15:28:24.290] [TEST   ]:   Failed: 1
+[15:28:24.290] [TEST   ]:   Undefined: 0
+[15:28:24.316] [TEST   ]:   Pass Rate: 50.000%
+[15:28:24.317] [TEST   ]: Detailed Results:
+[15:28:24.317] [TEST   ]:   ReadStatementTesting.ReadStatementSingleLine, Result: Pass, Duration: 00:00:00.0276137
+[15:28:24.317] [TEST   ]:   ReadStatementTesting.ReadStatementMultiLine, Result: Fail, Duration: 00:00:00.0009040
+[15:28:24.317] [TEST   ]:     Expected: [=proc add:input a, b:body a + b], Actual: [=proc add
+:input a, b
+:body a + b]
+[15:28:24.326] [INFO   ]: TestRunner.Director has completed all actions.

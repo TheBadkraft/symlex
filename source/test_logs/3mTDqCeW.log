@@ -1,0 +1,27 @@
+Launching MindForge.TestRunner!
+[15:18:19.117] [INFO   ]: TestRunner.Director is ready to run.
+[15:18:19.187] [INFO   ]: Begin Test Discovery ...
+[15:18:19.367] [INFO   ]: Found 2 test containers in console.tests
+[15:18:19.367] [INFO   ]: TestContainer: LexerTesting *** IGNORED ***
+[15:18:19.367] [INFO   ]: TestContainer: InputBufferTesting
+[15:18:19.393] [INFO   ]: Begin Test Execution ...
+[15:18:19.435] [INFO   ]: Test    InitializedInputBuffer in InputBufferTesting             Pass.
+[15:18:19.447] [INFO   ]: Test         InputBufferLength in InputBufferTesting             Pass.
+[15:18:19.464] [INFO   ]: Test       ReadSingleCharacter in InputBufferTesting             Pass.
+[15:18:19.477] [INFO   ]: Test        ReadMultiCharacter in InputBufferTesting             Pass.
+[15:18:19.491] [INFO   ]: Test             ReadBackspace in InputBufferTesting             Pass.
+[15:18:19.496] [INFO   ]: ... Test Execution Complete
+[15:18:19.497] [INFO   ]: Begin Auditing Results ...
+[15:18:19.502] [TEST   ]: Test Summary:
+[15:18:19.502] [TEST   ]:   Total Tests: 5
+[15:18:19.502] [TEST   ]:   Passed: 5
+[15:18:19.502] [TEST   ]:   Failed: 0
+[15:18:19.502] [TEST   ]:   Undefined: 0
+[15:18:19.527] [TEST   ]:   Pass Rate: 100.000%
+[15:18:19.528] [TEST   ]: Detailed Results:
+[15:18:19.528] [TEST   ]:   InputBufferTesting.InitializedInputBuffer, Result: Pass, Duration: 00:00:00.0231862
+[15:18:19.528] [TEST   ]:   InputBufferTesting.InputBufferLength, Result: Pass, Duration: 00:00:00.0037856
+[15:18:19.528] [TEST   ]:   InputBufferTesting.ReadSingleCharacter, Result: Pass, Duration: 00:00:00.0108174
+[15:18:19.528] [TEST   ]:   InputBufferTesting.ReadMultiCharacter, Result: Pass, Duration: 00:00:00.0091576
+[15:18:19.528] [TEST   ]:   InputBufferTesting.ReadBackspace, Result: Pass, Duration: 00:00:00.0093039
+[15:18:19.537] [INFO   ]: TestRunner.Director has completed all actions.

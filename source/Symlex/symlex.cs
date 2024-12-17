@@ -1,50 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-string prompt = "S>";
-string dataFilePath = "functions.data";
-string indexFilePath = "functions.index";
+using Symlex.Core;
 
-// Runtime runtime = new Runtime(dataFilePath, indexFilePath);
+const string dataFilePath = "functions.data";
+const string indexFilePath = "functions.index";
 
 Console.WriteLine("Welcome to Symlex Console! Type 'exit' to quit, 'save' to save functions.");
+Runtime runtime = new Runtime(dataFilePath, indexFilePath);
 
-while (true)
-{
-    Console.Write(prompt);
-
-    // Redirect standard input to a StreamReader
-    using (var sr = new StreamReader(Console.OpenStandardInput(), Console.InputEncoding))
-    {
-        StringBuilder multiLineInput = new StringBuilder();
-        string line;
-
-        do
-        {
-            line = sr.ReadLine(); // Read one line at a time
-
-            if (line == null) // If EOF or user signals end of input
-                break;
-
-            multiLineInput.AppendLine(line);
-
-        } while (!line.TrimEnd().EndsWith("]"));
-
-        string input = multiLineInput.ToString().Trim();
-
-        if (input.ToLower() == "[exit]")
-        {
-            return; // Exit the program
-        }
-        else if (input.ToLower() == "[save]")
-        {
-            // runtime.SaveFunctionsToFile(dataFilePath, indexFilePath);
-            Console.WriteLine("Functions saved to file.");
-        }
-        else if (input.Length > 0)
-        {
-            // runtime.Execute(input);
-        }
-    }
-}
+//  When runtime is launched, we are ready to begin processing input
+runtime.Run();
 
 Console.WriteLine("Goodbye!");

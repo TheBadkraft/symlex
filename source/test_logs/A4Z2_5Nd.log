@@ -1,0 +1,22 @@
+Launching MindForge.TestRunner!
+[15:46:54.656] [INFO   ]: TestRunner.Director is ready to run.
+[15:46:54.724] [INFO   ]: Begin Test Discovery ...
+[15:46:54.912] [INFO   ]: Found 3 test containers in console.tests
+[15:46:54.912] [INFO   ]: TestContainer: LexerTesting *** IGNORED ***
+[15:46:54.913] [INFO   ]: TestContainer: InputBufferTesting *** IGNORED ***
+[15:46:54.913] [INFO   ]: TestContainer: ReadStatementTesting
+[15:46:54.933] [INFO   ]: Begin Test Execution ...
+[15:46:54.976] [INFO   ]: Test   ReadStatementSingleLine in ReadStatementTesting           Pass.
+[15:46:54.998] [INFO   ]: Test    ReadStatementMultiLine in ReadStatementTesting           Pass.
+[15:46:55.003] [INFO   ]: ... Test Execution Complete
+[15:46:55.004] [INFO   ]: Begin Auditing Results ...
+[15:46:55.008] [TEST   ]: Test Summary:
+[15:46:55.008] [TEST   ]:   Total Tests: 2
+[15:46:55.008] [TEST   ]:   Passed: 2
+[15:46:55.008] [TEST   ]:   Failed: 0
+[15:46:55.008] [TEST   ]:   Undefined: 0
+[15:46:55.035] [TEST   ]:   Pass Rate: 100.000%
+[15:46:55.036] [TEST   ]: Detailed Results:
+[15:46:55.036] [TEST   ]:   ReadStatementTesting.ReadStatementSingleLine, Result: Pass, Duration: 00:00:00.0279072
+[15:46:55.036] [TEST   ]:   ReadStatementTesting.ReadStatementMultiLine, Result: Pass, Duration: 00:00:00.0142432
+[15:46:55.047] [INFO   ]: TestRunner.Director has completed all actions.
