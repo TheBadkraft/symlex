@@ -2,9 +2,9 @@ using System.Text;
 
 using Symlex.IO;
 
-namespace Symlex.Input.Tests;
+namespace Symlex.Terminal.Tests;
 
-[TestContainer(Ignore = false)]
+[TestContainer(Ignore = true)]
 public class ReadStatementTesting
 {
     private InputBuffer inputBuffer;

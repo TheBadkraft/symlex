@@ -1,0 +1,34 @@
+Launching MindForge.TestRunner!
+[19:41:01.196] [INFO   ]: TestRunner.Director is ready to run.
+[19:41:01.277] [INFO   ]: Begin Test Discovery ...
+[19:41:01.463] [INFO   ]: Found 3 test containers in console.tests
+[19:41:01.463] [INFO   ]: TestContainer: InputBufferTesting *** IGNORED ***
+[19:41:01.464] [INFO   ]: TestContainer: LexerTesting
+[19:41:01.482] [INFO   ]: TestContainer: ReadStatementTesting *** IGNORED ***
+[19:41:01.486] [INFO   ]: Begin Test Execution ...
+[19:41:01.529] [INFO   ]: Test       TokenizeEmptyString in LexerTesting                   Pass.
+[19:41:01.536] [INFO   ]: Test        TokenizeWhiteSpace in LexerTesting                   Pass.
+[19:41:01.548] [INFO   ]: Test        TokenizeSingleWord in LexerTesting                   Pass.
+[19:41:01.553] [INFO   ]: Test      TokenizeSingleNumber in LexerTesting                   Pass.
+[19:41:01.559] [INFO   ]: Test    TokenizeSingleOperator in LexerTesting                   Pass.
+[19:41:01.564] [INFO   ]: Test           TokenizeKeyword in LexerTesting                   Pass.
+[19:41:01.576] [INFO   ]: Test        TokenizeExpression in LexerTesting                   Pass.
+[19:41:01.583] [INFO   ]: Test           TokenizeInvalid in LexerTesting                   Pass.
+[19:41:01.590] [INFO   ]: ... Test Execution Complete
+[19:41:01.591] [INFO   ]: Begin Auditing Results ...
+[19:41:01.595] [TEST   ]: Test Summary:
+[19:41:01.595] [TEST   ]:   Total Tests: 8
+[19:41:01.595] [TEST   ]:   Passed: 8
+[19:41:01.595] [TEST   ]:   Failed: 0
+[19:41:01.595] [TEST   ]:   Undefined: 0
+[19:41:01.621] [TEST   ]:   Pass Rate: 100.000%
+[19:41:01.622] [TEST   ]: Detailed Results:
+[19:41:01.622] [TEST   ]:   LexerTesting.TokenizeEmptyString, Result: Pass, Duration: 00:00:00.0276909
+[19:41:01.622] [TEST   ]:   LexerTesting.TokenizeWhiteSpace, Result: Pass, Duration: 00:00:00.0007552
+[19:41:01.622] [TEST   ]:   LexerTesting.TokenizeSingleWord, Result: Pass, Duration: 00:00:00.0079165
+[19:41:01.623] [TEST   ]:   LexerTesting.TokenizeSingleNumber, Result: Pass, Duration: 00:00:00.0011097
+[19:41:01.623] [TEST   ]:   LexerTesting.TokenizeSingleOperator, Result: Pass, Duration: 00:00:00.0007830
+[19:41:01.623] [TEST   ]:   LexerTesting.TokenizeKeyword, Result: Pass, Duration: 00:00:00.0008220
+[19:41:01.623] [TEST   ]:   LexerTesting.TokenizeExpression, Result: Pass, Duration: 00:00:00.0073578
+[19:41:01.623] [TEST   ]:   LexerTesting.TokenizeInvalid, Result: Pass, Duration: 00:00:00.0007765
+[19:41:01.631] [INFO   ]: TestRunner.Director has completed all actions.

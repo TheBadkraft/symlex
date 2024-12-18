@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <RootNamespace>Symlex.Console.Tests</RootNamespace>
+    <RootNamespace>Symlex.Terminal.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

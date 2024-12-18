@@ -1,0 +1,58 @@
+[
+  {
+    "timestamp": "2024-12-17T19:39:11.2047646-06:00",
+    "method": "LexerTesting.TokenizeEmptyString",
+    "result": "Pass",
+    "duration": "00:00:00.0265753",
+    "message": null
+  },
+  {
+    "timestamp": "2024-12-17T19:39:11.2226713-06:00",
+    "method": "LexerTesting.TokenizeWhiteSpace",
+    "result": "Pass",
+    "duration": "00:00:00.0007622",
+    "message": null
+  },
+  {
+    "timestamp": "2024-12-17T19:39:11.2353379-06:00",
+    "method": "LexerTesting.TokenizeSingleWord",
+    "result": "Pass",
+    "duration": "00:00:00.0077338",
+    "message": null
+  },
+  {
+    "timestamp": "2024-12-17T19:39:11.2424387-06:00",
+    "method": "LexerTesting.TokenizeSingleNumber",
+    "result": "Pass",
+    "duration": "00:00:00.0025973",
+    "message": null
+  },
+  {
+    "timestamp": "2024-12-17T19:39:11.2483399-06:00",
+    "method": "LexerTesting.TokenizeSingleOperator",
+    "result": "Pass",
+    "duration": "00:00:00.0008063",
+    "message": null
+  },
+  {
+    "timestamp": "2024-12-17T19:39:11.2542953-06:00",
+    "method": "LexerTesting.TokenizeKeyword",
+    "result": "Pass",
+    "duration": "00:00:00.0008412",
+    "message": null
+  },
+  {
+    "timestamp": "2024-12-17T19:39:11.2659631-06:00",
+    "method": "LexerTesting.TokenizeExpression",
+    "result": "Pass",
+    "duration": "00:00:00.0066545",
+    "message": null
+  },
+  {
+    "timestamp": "2024-12-17T19:39:11.2714921-06:00",
+    "method": "LexerTesting.TokenizeInvalid",
+    "result": "Pass",
+    "duration": "00:00:00.0008324",
+    "message": null
+  }
+]
