@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>Symlex.Terminal.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../Symlex/symlex.csproj" />
+  
+    <Reference Include="../../../lib/FakeItEasy.dll" />
+    <Reference Include="../../../lib/mindforge.testrunner.dll" />
+
+    <Using Include="FakeItEasy" />
+    <Using Include="System.Diagnostics" />
+    <Using Include="MindForge.TestRunner.UnitTesting" />
+  </ItemGroup>
+
+</Project>
