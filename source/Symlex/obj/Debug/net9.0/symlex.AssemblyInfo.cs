@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("symlex")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+130b55d53c9169a87c0284c9da2cafc646d1043d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d75fc32dfb0582017306f35cb212f499f355a267")]
 [assembly: System.Reflection.AssemblyProductAttribute("symlex")]
 [assembly: System.Reflection.AssemblyTitleAttribute("symlex")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
