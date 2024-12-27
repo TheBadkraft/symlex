@@ -2,12 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "symlex.net",
+      "name": "Synaptic.net",
       "type": "coreclr",
       "request": "launch",
       "console": "externalTerminal",
-      "program": "${workspaceFolder}/Symlex/bin/Debug/net9.0/symlex",
-      "preLaunchTask": "build symlex"
+      "program": "${workspaceFolder}/Synaptic.Terminal/bin/Debug/net9.0/synaptic",
+      "preLaunchTask": "build Synaptic"
     },
     {
       "name": "runner.net",

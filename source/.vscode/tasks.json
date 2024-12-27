@@ -3,14 +3,14 @@
 	"tasks": [
 		{
 			"type": "dotnet",
-			"task": "build ${workspaceFolder}/Symlex/symlex.csproj",
-			"file": "${workspaceFolder}/Symlex/symlex.csproj",
+			"task": "build ${workspaceFolder}/Synaptic.Terminal/synaptic.csproj",
+			"file": "${workspaceFolder}/Synaptic.Terminal/synaptic.csproj",
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			},
 			"problemMatcher": [],
-			"label": "build symlex"
+			"label": "build Synaptic"
 		},
 		{
 			"type": "shell",
@@ -18,7 +18,7 @@
 			"command": "dotnet",
 			"args": [
 				"build",
-				"${workspaceFolder}/.test/Symlex.Lexer.Tests/console.tests.csproj"
+				"${workspaceFolder}/.test/Synaptic.Lexical.Tests/terminal.tests.csproj"
 			],
 			"group": {
 				"kind": "build",
