@@ -7,7 +7,7 @@ namespace Synaptic.Terminal.Tests;
 /// <summary>
 /// Test container to test FunctionParser class
 /// </summary>
-[TestContainer(Ignore = true)]
+[TestContainer(Ignore = false)]
 public class ParseTokensTesting
 {
     private InputParser Parser { get; set; }
@@ -29,8 +29,8 @@ public class ParseTokensTesting
 
         // Assert
         Assert.IsNotNull(descriptor);
-        Assert.AreEqual(CompilerOp.Create, descriptor.Action);
-        Assert.AreEqual(CompilerTarget.Function, descriptor.Target);
+        Assert.AreEqual(ContextOp.Define, descriptor.Action);
+        Assert.AreEqual(ContextTarget.Function, descriptor.Target);
         //  "simpleFunc :input :body ()"
         int x = 0;
         Assert.AreEqual(TokenType.Identifier, descriptor.Data[x].Type, $"{x}:{descriptor.Data[x].Type}");
@@ -56,7 +56,7 @@ public class ParseTokensTesting
 
         Assert.AreEqual(7, descriptor.Data.Count);
 
-        Assert.AreEqual(expSource, descriptor.Data[0].Source);
+        Assert.AreEqual(expSource, descriptor.Data.Source);
         Debug.WriteLine($"{TestContext.TestMethodName} :: {new string(descriptor.Data[0].Source)}");
 
     }
@@ -73,8 +73,8 @@ public class ParseTokensTesting
         ContextDescriptor descriptor = Parser.Descriptor;
 
         // Assert
-        Assert.AreEqual(CompilerOp.Create, descriptor.Action);
-        Assert.AreEqual(CompilerTarget.Function, descriptor.Target);
+        Assert.AreEqual(ContextOp.Define, descriptor.Action);
+        Assert.AreEqual(ContextTarget.Function, descriptor.Target);
 
         Assert.AreEqual(10, descriptor.Data.Count);
 
@@ -117,10 +117,11 @@ public class ParseTokensTesting
     #region Helper Methods
     private IReadOnlyList<Token> Tokenize(string input)
     {
-        var lexer = new LexerService();
+        //  lexer ctor param is null because it's not needed (yet) ...
+        var lexer = new LexerService(null);
         var statement = new ArraySegment<char>(input.ToCharArray());
 
-        return lexer.Tokenize(statement);
+        return lexer.Tokenize<Token>(statement);
     }
     #endregion Helper Methods
     #region Test SetUp & TearDown

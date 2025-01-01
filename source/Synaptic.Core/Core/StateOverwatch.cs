@@ -35,12 +35,23 @@ public partial class SynapticHub
         /// <summary>
         /// <inheritdoc/>
         /// </summary>
-        public TResult GetState<TResult>(Func<ISystemState, TResult> getState) => getState(State);
-
+        public TResult CheckState<TResult>(Func<ISystemState, TResult> getState) => getState(State);
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="serviceContainer"></inheritdoc></param>
         public void OnRegistered(IServiceContainer serviceContainer)
         {
             //  nothing to do here ...
         }
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        public void Start() { }
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        public void Stop() { }
 
         /// <summary>
         /// Overwatch Unsuscriber class.
@@ -58,6 +69,9 @@ public partial class SynapticHub
                 Observer = observer;
             }
 
+            /// <summary>
+            /// <inheritdoc/>
+            /// </summary>
             public void Dispose()
             {
                 if (Observers.Contains(Observer))

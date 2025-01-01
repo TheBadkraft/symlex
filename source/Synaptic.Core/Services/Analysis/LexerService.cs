@@ -1,6 +1,6 @@
 
-using Synaptic.Analysis;
 using Synaptic.Core;
+using Synaptic.Analysis;
 
 namespace Synaptic.Services.Analysis;
 
@@ -13,8 +13,9 @@ namespace Synaptic.Services.Analysis;
 public class LexerService : ILexerService
 {
     private InputLexer Lexer { get; init; } = new InputLexer();
+    private ITaskingService Tasking { get; init; }
 
-    internal LexerService() { }
+    internal LexerService(ITaskingService taskingService) => Tasking = taskingService;
 
     /// <summary>
     /// Tokenizes the input statement.
@@ -25,8 +26,24 @@ public class LexerService : ILexerService
     {
         return (IReadOnlyList<TResult>)Lexer.Tokenize(input);
     }
-
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public void OnRegistered(IServiceContainer serviceContainer)
+    {
+        //  nothing to do here ...
+    }
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    public void Start()
+    {
+        //  nothing to do here ...
+    }
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    public void Stop()
     {
         //  nothing to do here ...
     }

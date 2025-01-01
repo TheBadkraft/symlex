@@ -12,15 +12,15 @@ namespace Synaptic.IO;
 public class InputHandler //  TODO: (IInputService : ISynapticService)
 {
     private IInputBuffer InputBuffer { get; init; }
-    private LexerService Lexer { get; init; }
+    private ILexerService Lexer { get; init; }
     private IParsingService ParsingService { get; init; }
     internal IRuntime Runtime { get; init; }
 
-    public InputHandler(IInputBuffer inputBuffer, IServiceContainer services)
+    public InputHandler(IServiceContainer services, IResourceService resources)
     {
-        InputBuffer = inputBuffer;
+        InputBuffer = resources.GetResource<IInputBuffer>();
         //  get the lexer service
-        Lexer = services.GetService<LexerService>();
+        Lexer = services.GetService<ILexerService>();
         //  get the parsing service
         ParsingService = services.GetService<IParsingService>();
     }
@@ -39,7 +39,7 @@ public class InputHandler //  TODO: (IInputService : ISynapticService)
         }
 
         //  Tokenize the input
-        Data data = new(Lexer.Tokenize<Token>(statement));
-        ParsingService.Enqueue(data);
+        var tokens = Lexer.Tokenize<Token>(statement);
+        ParsingService.Enqueue(tokens);
     }
 }

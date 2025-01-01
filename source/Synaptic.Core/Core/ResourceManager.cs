@@ -16,12 +16,7 @@ public partial class SynapticHub
         /// <returns>The resource</returns>
         public object GetResource(Type resourceType)
         {
-            if (!Resources.TryGetValue(resourceType, out var resource))
-            {
-                //  handle missing resource
-            }
-
-            return resource;
+            return LocateResource(resourceType);
         }
         /// <summary>
         /// Get a resource from the resource manager.
@@ -47,10 +42,38 @@ public partial class SynapticHub
 
             return (Resources[typeof(TResource)] = resource) as TResource;
         }
-
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
         public void OnRegistered(IServiceContainer serviceContainer)
         {
             //  nothing to do here ..
+        }
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        public void Start()
+        {
+            //  nothing to do here ..
+        }
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        public void Stop()
+        {
+            //  nothing to do here ..
+        }
+
+        //  Locate resources
+        private static object LocateResource(Type resourceType)
+        {
+            if (!Resources.TryGetValue(resourceType, out var resource))
+            {
+                //  TODO: replace with error reporting and recover
+                throw new ArgumentException($"Resource ({resourceType.Name}) not found.");
+            }
+
+            return resource;
         }
     }
 }

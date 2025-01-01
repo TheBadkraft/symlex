@@ -57,6 +57,20 @@ public class SystemState : ISystemState
                 return false;
         }
     }
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    /// <typeparam name="TState"><inheritdoc/></typeparam>
+    /// <returns><inheritdoc/></returns>
+    public TState GetState<TState>() where TState : Enum
+    {
+        return typeof(TState) switch
+        {
+            Type t when t == typeof(RuntimeState) => (TState)(RuntimeState as object),
+            Type t when t == typeof(SynapticState) => (TState)(SynapticState as object),
+            _ => default
+        };
+    }
 }
 
 /// <summary>

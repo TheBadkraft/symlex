@@ -12,50 +12,50 @@ public class LexerTesting
     public static TestContext TestContext { get; set; }
 
     [Test]
-    public void TokenizeEmptyString()
+    public void EmptyString()
     {
-        var tokens = lexer.Tokenize(new ArraySegment<char>());
+        var tokens = lexer.Tokenize<Token>(new ArraySegment<char>());
         Assert.IsEmpty(tokens);
     }
 
     [Test]
-    public void TokenizeWhiteSpace()
+    public void WhiteSpace()
     {
-        var tokens = lexer.Tokenize(new ArraySegment<char>(" \t\n\r".ToCharArray()));
+        var tokens = lexer.Tokenize<Token>(new ArraySegment<char>(" \t\n\r".ToCharArray()));
         Assert.IsEmpty(tokens);
     }
 
     [Test]
-    public void TokenizeSingleWord()
+    public void SingleWord()
     {
-        var tokens = lexer.Tokenize(new ArraySegment<char>("hello".ToCharArray()));
+        var tokens = lexer.Tokenize<Token>(new ArraySegment<char>("hello".ToCharArray()));
         Assert.AreEqual(1, tokens.Count);
         Assert.AreEqual("hello", new string(tokens.First().Word()));
         Assert.AreEqual(TokenType.Identifier, tokens.First().Type);
     }
 
     [Test]
-    public void TokenizeSingleNumber()
+    public void SingleNumber()
     {
-        var tokens = lexer.Tokenize(new ArraySegment<char>("123".ToCharArray()));
+        var tokens = lexer.Tokenize<Token>(new ArraySegment<char>("123".ToCharArray()));
         Assert.AreEqual(1, tokens.Count);
         Assert.AreEqual("123", new string(tokens.First().Word()));
         Assert.AreEqual(TokenType.Number, tokens.First().Type);
     }
 
     [Test]
-    public void TokenizeSingleOperator()
+    public void SingleOperator()
     {
-        var tokens = lexer.Tokenize(new ArraySegment<char>("+".ToCharArray()));
+        var tokens = lexer.Tokenize<Token>(new ArraySegment<char>("+".ToCharArray()));
         Assert.AreEqual(1, tokens.Count);
         Assert.AreEqual("+", new string(tokens.First().Word()));
         Assert.AreEqual(TokenType.Operator, tokens.First().Type);
     }
 
     [Test]
-    public void TokenizeKeyword()
+    public void Keyword()
     {
-        var tokens = lexer.Tokenize(new ArraySegment<char>("if".ToCharArray()));
+        var tokens = lexer.Tokenize<Token>(new ArraySegment<char>("if".ToCharArray()));
         Assert.AreEqual(1, tokens.Count);
         Assert.AreEqual("if", new string(tokens.First().Word()));
         Assert.AreEqual(TokenType.Keyword, tokens.First().Type);
@@ -63,11 +63,11 @@ public class LexerTesting
 
     //  tokenize comma delimited list
     [Test]
-    public void TokenizeCommaDelimitedList()
+    public void CommaDelimitedList()
     {
         var input = "x, y, z";
         var statement = new ArraySegment<char>(input.ToCharArray());
-        var tokens = lexer.Tokenize(statement);
+        var tokens = lexer.Tokenize<Token>(statement);
 
         int x = 0;
         Assert.AreEqual(5, tokens.Count);
@@ -84,11 +84,11 @@ public class LexerTesting
     }
 
     [Test]
-    public void TokenizeExpression()
+    public void SimpleExpression()
     {
         var input = "[=proc test(input): if x < 5 then: body x = 5]";
         var statement = new ArraySegment<char>(input.ToCharArray());
-        var tokens = lexer.Tokenize(statement);
+        var tokens = lexer.Tokenize<Token>(statement);
 
         int x = 0;
         Assert.AreEqual(18, tokens.Count);
@@ -113,19 +113,32 @@ public class LexerTesting
     }
 
     [Test]
-    public void TokenizeInvalid()
+    public void Invalid()
     {
-        var tokens = lexer.Tokenize(new ArraySegment<char>("$".ToCharArray()));
+        var tokens = lexer.Tokenize<Token>(new ArraySegment<char>("$".ToCharArray()));
         Assert.AreEqual(1, tokens.Count);
         Assert.AreEqual("$", new string(tokens.First().Word()));
         Assert.AreEqual(TokenType.Invalid, tokens.First().Type);
+    }
+
+    [Test]
+    public void MultilineStatement()
+    {
+        var input = @"[=proc
+add
+: input a, b
+:body + a, b]
+";
+        var tokens = lexer.Tokenize<Token>(new(input.ToCharArray()));
+
     }
 
     #region Test SetUp & TearDown
     [SetUp]
     public void SetUp()
     {
-        lexer = new();
+        //  passing NULL to the constructor is okay for now since it isn't being used
+        lexer = new(null);
     }
 
     [TearDown]

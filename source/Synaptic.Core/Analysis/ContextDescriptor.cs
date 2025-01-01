@@ -7,23 +7,23 @@ namespace Synaptic.Analysis;
 /// </summary>
 public class ContextDescriptor
 {
-    private List<CompilerOp> instructions { get; } = new();
+    private List<ContextOp> instructions { get; } = new();
 
     /// <summary>
     /// The action to be performed on the target.
     /// </summary>
-    public CompilerOp Action { get; set; }
+    public ContextOp Action { get; set; }
     /// <summary>
     /// The descriptor target type.
     /// </summary>
-    public CompilerTarget Target { get; set; }
+    public ContextTarget Target { get; set; }
     /// <summary>
     /// The data to the descriptor.
     /// </summary>
     public Data Data { get; set; }
 
-    public ContextDescriptor() : this(CompilerOp.NoOp, CompilerTarget.None) { }
-    public ContextDescriptor(CompilerOp action, CompilerTarget target)
+    public ContextDescriptor() : this(ContextOp.NoOp, ContextTarget.None) { }
+    public ContextDescriptor(ContextOp action, ContextTarget target)
     {
         Action = action;
         Target = target;
@@ -40,7 +40,7 @@ public class ContextDescriptor
 
         if (descriptor is null)
         {
-            descriptor.Action = CompilerOp.Error;
+            descriptor.Action = ContextOp.Error;
             return descriptor;
         }
 
@@ -51,11 +51,15 @@ public class ContextDescriptor
     /// Adds a compiler operation to the descriptor.
     /// </summary>
     /// <param name="op">The compiler operation.</param>
-    public void AddOp(CompilerOp op) => instructions.Add(op);
+    public void AddOp(ContextOp op) => instructions.Add(op);
     /// <summary>
     /// Get the operation stack.
     /// </summary>
     /// <returns>A CompilerOp stack.</returns>
-    public Stack<CompilerOp> GetOpStack() => new(instructions);
-
+    public Stack<ContextOp> GetOpStack() => new(instructions);
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    /// <returns><inheritdoc/></returns>
+    public override string ToString() => $"({Target}) => {Action}";
 }

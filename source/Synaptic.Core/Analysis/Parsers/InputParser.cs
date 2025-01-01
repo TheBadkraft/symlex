@@ -36,13 +36,13 @@ public class InputParser : SynapticParser
         int index = 0;
         int start = 0;
 
-        CompilerOp op = CompilerOp.NoOp;
-        CompilerTarget target = CompilerTarget.None;
+        ContextOp op = ContextOp.NoOp;
+        ContextTarget target = ContextTarget.None;
 
-        if (IsCreateFunc(ref index, Descriptor.Data))
+        if (IsDefineFunc(ref index, Descriptor.Data))
         {
-            op = CompilerOp.Create;
-            target = CompilerTarget.Function;
+            op = ContextOp.Define;
+            target = ContextTarget.Function;
             start = index;
         }
 
@@ -52,7 +52,7 @@ public class InputParser : SynapticParser
         //  check the last token is a `]`
         if (!TryConsumeToken(ref index, Descriptor.Data, TokenType.Operator, "]"))
         {
-            op = CompilerOp.Error;    //  missing closing bracket
+            op = ContextOp.Error;    //  missing closing bracket
             start = 0;
             end = 0;
         }
@@ -69,8 +69,8 @@ public class InputParser : SynapticParser
         return true;
     }
 
-    //  check if the tokens represent a function creation
-    private static bool IsCreateFunc(ref int index, Data tokens)
+    //  check if the tokens represent a function definition
+    private static bool IsDefineFunc(ref int index, Data tokens)
     {
         //  read `[=proc` as first two valid tokens
         return TryConsumeToken(ref index, tokens, TokenType.Operator, "[=") &&

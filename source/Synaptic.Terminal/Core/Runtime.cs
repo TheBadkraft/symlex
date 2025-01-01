@@ -7,17 +7,21 @@ namespace Synaptic.Core;
 /// <summary>
 /// The main runtime of the Synaptic interpreter.
 /// </summary>
-public class Runtime : IRuntime
+public partial class Runtime : IRuntime
 {
     const string PROMPT = "E: ";
 
-    private bool IsShutdownRequested { get; set; } = false;
     private InputHandler InputHandler { get; set; }
-
+    private SynapticTerminal Terminal { get; init; }
+    private RuntimeState State
+    {
+        get => SynapticHub.Instance.GetState(state => state.GetState<RuntimeState>());
+        set => SynapticHub.Instance.UpdateState(state => state.SetState(value));
+    }
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    public ITerminal Terminal { get; init; }
+    ITerminal IRuntime.Terminal => Terminal;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Runtime"/> class.
@@ -29,6 +33,8 @@ public class Runtime : IRuntime
         Terminal = new SynapticTerminal();
         //  on runtime initialization, register self with SynapticHub as the Runtime
         SynapticHub.Instance.RegisterRuntime(this);
+        //  set the runtime state to idle
+        State = RuntimeState.Idle;
     }
 
     /// <summary>
@@ -36,20 +42,24 @@ public class Runtime : IRuntime
     /// </summary>
     public void Initialize(IServiceContainer services, IResourceService resources)
     {
+        //  register the terminal
+        _ = resources.RegisterResource<ITerminal>(Terminal);
+        //  register the input buffer
         var InputBuffer = resources.RegisterResource<IInputBuffer>(new InputBuffer());
-        InputHandler = new(InputBuffer, services) { Runtime = this };
+        InputHandler = new(services, resources) { Runtime = this };
     }
     /// <summary>
     /// Launches the Synaptic interpreter runtime.
     /// </summary>
     public void Launch()
     {
-        bool isRunning = !IsShutdownRequested;
+        var state = State = RuntimeState.Running;
 
-        while (isRunning)
+        while (state == RuntimeState.Running)
         {
             InputHandler.Process();
-            if (isRunning = !IsShutdownRequested) Terminal.Prompt();
+            state = State;
+            if (state == RuntimeState.Running || state == RuntimeState.Idle) Terminal.Prompt();
         }
     }
     /// <summary>
@@ -57,8 +67,8 @@ public class Runtime : IRuntime
     /// </summary>
     public void RequestShutdown()
     {
-        //  set shutdown flag TRUE
-        IsShutdownRequested = true;
+        //  set shutdown state
+        State = RuntimeState.Shutdown;
     }
     /// <summary>
     /// <inheritdoc/>
@@ -66,85 +76,5 @@ public class Runtime : IRuntime
     public void Dispose()
     {
         Terminal.Dispose();
-    }
-
-    private class SynapticTerminal : ITerminal
-    {
-        private static Encoding Encoder { get; } = Encoding.UTF8;
-
-        //  standard output stream
-        private Stream StdOut { get; } = Console.OpenStandardOutput();
-        //  error output stream
-        private Stream ErrOut { get; } = Console.OpenStandardError();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SynapticTerminal"/> class.
-        /// </summary>
-        internal SynapticTerminal()
-        {
-            //  set the console output encoding
-            Console.OutputEncoding = Encoder;
-        }
-
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public void Prompt()
-        {
-            Write($"{PROMPT}");
-        }
-        public void Prompt(string message)
-        {
-            Write($"{message}\n{PROMPT}");
-        }
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public void Write(string message)
-        {
-            //  write to standard output stream
-            message = $"{message}";
-            StdOut.Write(GetBytes(message));
-        }
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public void WriteErr(string message)
-        {
-            //  write to error output stream
-            message = $"\n*** ERR: {message}";
-            ErrOut.Write(GetBytes(message));
-        }
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public void WriteLn(string message)
-        {
-            //  write line to standard output stream
-            message = $"{message}\n";
-            StdOut.Write(GetBytes(message));
-        }
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public void WriteErrLn(string message)
-        {
-            //  write line to error output stream
-            message = $"\n*** ERR: {message}\n";
-            ErrOut.Write(GetBytes(message));
-        }
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public void Dispose()
-        {
-            //  TODO: implement ... ???
-        }
-
-        //  get the message byte array
-        private static byte[] GetBytes(string message)
-        {
-            return Encoder.GetBytes(message);
-        }
     }
 }

@@ -1,6 +1,8 @@
 
 using System.Runtime.CompilerServices;
+
 using Synaptic.Services.Analysis;
+using Synaptic.Services.Threading;
 
 [assembly: InternalsVisibleTo("terminal.tests")]
 
@@ -18,6 +20,7 @@ public partial class SynapticHub : ISynapticHub
     private SystemState State { get; init; }
     private ServiceContainer Services { get; init; }
     private StateOverwatch Overwatch { get; init; }
+    private TaskingService Tasking { get; init; }
     private ResourceManager Resources { get; init; }
 
     /// <summary>
@@ -40,13 +43,20 @@ public partial class SynapticHub : ISynapticHub
         Overwatch = new(State = new());
         State.SetState(SynapticState.Idle);
 
+        Tasking = new TaskingService();
+
         Services.RegisterService<IStateOverwatch>(Overwatch);
-        Services.RegisterService(new LexerService());
-        Services.RegisterService<IParsingService>(new ParsingService());
+        Services.RegisterService<ITaskingService>(Tasking);
+        Services.RegisterService<ILexerService>(new LexerService(Tasking));
+        Services.RegisterService<IParsingService>(new ParsingService(Tasking));
 
-        Resources = Services.RegisterService(new ResourceManager());
+        Resources = (ResourceManager)Services
+            .RegisterService<IResourceService>(new ResourceManager());
 
-        // Services.GetService<IParsingService>().Run();
+        //  order matters
+        Services.StartService<ITaskingService>();
+        Services.StartService<ILexerService>();
+        Services.StartService<IParsingService>();
     }
 
     /// <summary>
@@ -56,5 +66,6 @@ public partial class SynapticHub : ISynapticHub
     public void RegisterRuntime(IRuntime runtime)
     {
         (Runtime = runtime).Initialize(Services, Resources);
+        State.SetState(SynapticState.Running);
     }
 }

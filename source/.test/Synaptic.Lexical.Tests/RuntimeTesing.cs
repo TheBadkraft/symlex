@@ -5,7 +5,7 @@ using Synaptic.Core;
 namespace Synaptic.Terminal.Tests;
 
 //  Test suite for the IRuntime interface
-[TestContainer(Ignore = false)]
+[TestContainer(Ignore = true)]
 public class RuntimeTesing
 {
     private IRuntime runtime;

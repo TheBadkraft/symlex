@@ -18,27 +18,25 @@ public class Data : IData<Token>
     /// <param name="index">The index</param>
     /// <returns>A token</returns>
     public Token this[int index] => Tokens.ElementAt(index);
-
+    /// <summary>
+    /// Gets the token at the specified range.
+    /// </summary>
+    /// <param name="range">The range</param>
+    /// <returns>A token array</returns>
     public Token[] this[Range range]
     {
         get
         {
             // Calculate the start and end indices based on the range
             var r = RangeOf(range.Start, range.End, 0);
-
             // Return an enumerator that yields the elements within the range
             return Enumerable.Range(r.start, r.length).Select(i => this[i]).ToArray();
         }
     }
-
-    private (int start, int length) RangeOf(Index start, Index end, int offset)
-    {
-        var begin = start.GetOffset(offset);
-        var length = end.GetOffset(offset) - begin;
-
-        return (start: begin, length: length);
-    }
-
+    /// <summary>
+    /// Gets the source of the token collection.
+    /// </summary>
+    public ArraySegment<char> Source => Tokens.ElementAt(0).Source;
     /// <summary>
     /// Gets the current token.
     /// </summary>
@@ -90,5 +88,19 @@ public class Data : IData<Token>
     public void Dispose()
     {
         //  nothing to do here
+    }
+    /// <summary>
+    /// Returns a string representation of the data source.
+    /// </summary>
+    /// <returns><inheritdoc/></returns>
+    public override string ToString() => new(Source);
+
+    //  Helper method to calculate the start and length based on the range
+    private (int start, int length) RangeOf(Index start, Index end, int offset)
+    {
+        var begin = start.GetOffset(offset);
+        var length = end.GetOffset(offset) - begin;
+
+        return (start: begin, length: length);
     }
 }

@@ -22,5 +22,5 @@ public interface IStateOverwatch : ISynapticService
     /// <typeparam name="TResult">The type of the result</typeparam>
     /// <param name="selector">The selector function to apply to the state</param>
     /// <returns>The result of the selector function</returns>
-    TResult GetState<TResult>(Func<ISystemState, TResult> getState);
+    TResult CheckState<TResult>(Func<ISystemState, TResult> getState);
 }

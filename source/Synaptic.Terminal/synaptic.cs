@@ -1,11 +1,12 @@
 ﻿
+using Synaptic.IO;
 using Synaptic.Core;
 
 const string dataFilePath = "functions.data";
 
 using (Runtime runtime = new Runtime())
 {
-    var terminal = runtime.Terminal;
+    var terminal = SynapticHub.Instance.Resources.GetResource<ITerminal>();
     terminal.Prompt("Welcome to Synaptic Console! Type 'exit' to quit, 'save' to save functions.");
     if (args.Length == 1 && args[0] == "/i")
     {

@@ -19,4 +19,10 @@ public interface ISystemState
     /// <param name="state">The state to check</param>
     /// <returns>TRUE if the system is in the specified state; otherwise FALSE</returns>
     bool Is<TState>(TState state) where TState : Enum;
+    /// <summary>
+    /// Get the current state of the system.
+    /// </summary>
+    /// <typeparam name="TState">The type of the state</typeparam>
+    /// <returns>The current state.</returns>
+    TState GetState<TState>() where TState : Enum;
 }

@@ -31,8 +31,8 @@ public class SynapticHubTesting
 
         var observer = new StateObserver(state =>
         {
-            runtimeShutdown = state.GetState(s => s.Is(RuntimeState.Shutdown));
-            runtimeError = state.GetState(s => s.Is(RuntimeState.Error));
+            runtimeShutdown = state.CheckState(s => s.Is(RuntimeState.Shutdown));
+            runtimeError = state.CheckState(s => s.Is(RuntimeState.Error));
         });
 
         disposables.Add(synapticHub.Subscribe(observer));

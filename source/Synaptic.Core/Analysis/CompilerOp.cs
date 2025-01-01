@@ -1,93 +1,86 @@
 
-using System.Diagnostics.Tracing;
-
 namespace Synaptic.Analysis;
 
 /// <summary>
-/// The <see cref="CompilerOp"/> is a byte code instruction used 
-/// by the Synaptic compiler.
+/// Represents a compiler operation. These are determined during 
+/// parsing and analysis.
 /// </summary>
-/// <remarks>
-/// We can add more operations as needed. I a <see cref="CompilerOp"/> 
-/// is needed on the fly, instantiate via reflection as the constructor
-/// is private.
-/// </remarks>
 public struct CompilerOp
 {
-    #region helper properties
+    #region helper members
     private const string NOOP = "NoOp";
-    private const string CREATE = "Create";
     private const string PUSH = "Push";
     private const string POP = "Pop";
+    private const string DECLARE = "Declare";
     private const string CALL = "Call";
     private const string ASSIGN = "Assign";
     private const string RETURN = "Return";
     private const string JUMP = "Jump";
-    private const string BUILD = "Build";
     private const string ERROR = "Error";
 
-    private const byte NoOpCode = 0x00;
-    private const byte CreateOpCode = 0x01;
-    private const byte PushOpCode = 0x02;
-    private const byte PopOpCode = 0x03;
-    private const byte CallOpCode = 0x04;
-    private const byte AssignOpCode = 0x05;
-    private const byte ReturnOpCode = 0x06;
-    private const byte JumpOpCode = 0x07;
-    private const byte BuildOpCode = 0x99;
-    private const byte ErrorOpCode = 0xFE;
-    #endregion helper properties
 
-    private byte OpCode { get; init; }
+    private enum OpCodes
+    {
+        NoOp = 0x00,
+        Push = 0x02,
+        Pop = 0x03,
+        Declare = 0x04,
+        Call = 0x05,
+        Assign = 0x06,
+        Return = 0x07,
+        Jump = 0x08,
+        Error = 0xFE
+    }
+    #endregion helper members
+
+    private OpCodes OpCode { get; init; }
 
     /// <summary>
     /// Gets the name of the operation.
     /// </summary>
     public string Name { get; init; }
 
+    #region op members
     /// <summary>
     /// Represents the NoOp operation.
     /// </summary>
-    public static CompilerOp NoOp { get; } = new(NOOP, NoOpCode);
-    /// <summary>
-    /// Represents the Create operation.
-    /// </summary>
-    public static CompilerOp Create { get; } = new(CREATE, CreateOpCode);
+    public static CompilerOp NoOp { get; } = new(NOOP, OpCodes.NoOp);
     /// <summary>
     /// Represents the Push operation.
     /// </summary>
-    public static CompilerOp Push { get; } = new(PUSH, PushOpCode);
+    public static CompilerOp Push { get; } = new(PUSH, OpCodes.Push);
     /// <summary>
     /// Represents the Pop operation.
     /// </summary>
-    public static CompilerOp Pop { get; } = new(POP, PopOpCode);
+    public static CompilerOp Pop { get; } = new(POP, OpCodes.Pop);
+    /// <summary>
+    /// Represents the Declare operation.
+    /// </summary>
+    public static CompilerOp Desclare { get; } = new(DECLARE, OpCodes.Declare);
     /// <summary>
     /// Represents the Call operation.
     /// </summary>
-    public static CompilerOp Call { get; } = new(CALL, CallOpCode);
+    public static CompilerOp Call { get; } = new(CALL, OpCodes.Call);
     /// <summary>
     /// Represents the Assign operation.
     /// </summary>
-    public static CompilerOp Assign { get; } = new(ASSIGN, AssignOpCode);
+    public static CompilerOp Assign { get; } = new(ASSIGN, OpCodes.Assign);
     /// <summary>
     /// Represents the Return operation.
     /// </summary>
-    public static CompilerOp Return { get; } = new(RETURN, ReturnOpCode);
+    public static CompilerOp Return { get; } = new(RETURN, OpCodes.Return);
     /// <summary>
     /// Represents the Jump operation.
     /// </summary>
-    public static CompilerOp Jump { get; } = new(JUMP, JumpOpCode);
+    public static CompilerOp Jump { get; } = new(JUMP, OpCodes.Jump);
     /// <summary>
-    /// Represents the Build operation.
+    /// Represents an Error condition.
     /// </summary>
-    public static CompilerOp Build { get; } = new(BUILD, 0x10);
-    /// <summary>
-    /// Represents the Error operation.
-    /// </summary>
-    public static CompilerOp Error { get; } = new(ERROR, 0x20);
+    public static CompilerOp Error { get; } = new(ERROR, OpCodes.Error);
+    #endregion op members
 
     //  private to restrict instantiation; only the static instances are allowed
-    private CompilerOp(string name, byte opCode)
+    private CompilerOp(string name, OpCodes opCode)
     {
         OpCode = opCode;
         Name = name;
@@ -97,23 +90,22 @@ public struct CompilerOp
     /// Converts the <see cref="CompilerOp"/> to a byte.
     /// </summary>
     /// <param name="comOp">The <see cref="CompilerOp"/> to convert.</param>
-    public static implicit operator byte(CompilerOp comOp) => comOp.OpCode;
+    public static implicit operator byte(CompilerOp comOp) => (byte)comOp.OpCode;
     /// <summary>
     /// Converts a byte to a <see cref="CompilerOp"/>.
     /// </summary>
     /// <param name="byteCode">The byte to convert.</param>
-    public static implicit operator CompilerOp(byte byteCode) => byteCode switch
+    public static implicit operator CompilerOp(byte byteCode) => (OpCodes)byteCode switch
     {
-        NoOpCode => NoOp,
-        CreateOpCode => Create,
-        PushOpCode => Push,
-        PopOpCode => Pop,
-        CallOpCode => Call,
-        AssignOpCode => Assign,
-        ReturnOpCode => Return,
-        JumpOpCode => Jump,
-        BuildOpCode => Build,
-        ErrorOpCode => Error,
+        OpCodes.NoOp => NoOp,
+        OpCodes.Push => Push,
+        OpCodes.Pop => Pop,
+        OpCodes.Declare => Desclare,
+        OpCodes.Call => Call,
+        OpCodes.Assign => Assign,
+        OpCodes.Return => Return,
+        OpCodes.Jump => Jump,
+        OpCodes.Error => Error,
         _ => NoOp
     };
     /// <summary>
@@ -126,7 +118,7 @@ public struct CompilerOp
         return obj is CompilerOp comOp && comOp.OpCode == OpCode;
     }
     /// <summary>
-    /// Gets the hash code of the <see cref="CompilerOp"/>.
+    /// Gets the hash code of the <see cref="ContextOp"/>.
     /// </summary>
     /// <returns>The hash code.</returns>
     public override int GetHashCode() => OpCode.GetHashCode();
@@ -134,5 +126,5 @@ public struct CompilerOp
     /// Converts the <see cref="CompilerOp"/> to a string.
     /// </summary>
     /// <returns>The string representation of the <see cref="CompilerOp"/>.</returns>
-    public override string ToString() => $"{Name} (0x{OpCode:x2})";
+    public override string ToString() => $"Compiler.{Name} (0x{(byte)OpCode:x2})";
 }
